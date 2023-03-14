@@ -1,9 +1,15 @@
+import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+// Layouts
+import Main, { mainLoader } from './layouts/Main';
+// Actions
+import { logoutAction } from './actions/logout';
+// Routes
 import Dashboard, { dashboardLoader } from './pages/Dashboard';
 import Error from './pages/Error';
-import Logout from './components.jsx/Logout';
-import Main, { mainLoader } from './layouts/Main';
-import { logoutAction } from './actions/logout';
+// Library containers
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +40,7 @@ const App = () => {
   return (
     <div>
       <RouterProvider router={router} />
+      <ToastContainer />
     </div>
   )
 }
