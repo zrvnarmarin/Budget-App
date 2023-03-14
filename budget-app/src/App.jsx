@@ -5,7 +5,7 @@ import Main, { mainLoader } from './layouts/Main';
 // Actions
 import { logoutAction } from './actions/logout';
 // Routes
-import Dashboard, { dashboardLoader } from './pages/Dashboard';
+import Dashboard, { dashboardAction, dashboardLoader } from './pages/Dashboard';
 import Error from './pages/Error';
 // Library containers
 import { ToastContainer } from 'react-toastify'
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
         path: '/', //ili index: true - kad dojdemo na / rutu, pokazi dashboard 
         element: <Dashboard />,
         loader: dashboardLoader,
+        action: dashboardAction,
         errorElement: <Error />
       },
       {
