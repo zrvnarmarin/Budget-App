@@ -5,6 +5,7 @@ import { fetchData, createBudget, createExpense } from '../utils/helpers'
 import Intro from '../components.jsx/Intro'
 import AddBudgetForm from '../components.jsx/AddBudgetForm'
 import AddExpenseForm from '../components.jsx/AddExpenseForm';
+import BudgetItem from '../components.jsx/BudgetItem';
 
 // loader
 export const dashboardLoader = () => {
@@ -71,6 +72,12 @@ const Dashboard = () => {
                             <div>
                                 <AddBudgetForm />
                                 <AddExpenseForm budgets={budgets} />
+                            </div>
+                            <h2>Existing Budgets</h2>
+                            <div>
+                                {budgets.map(budget =>
+                                    <BudgetItem key={budget.id} budget={budget} /> 
+                                )}
                             </div>
                         </div>
                         :

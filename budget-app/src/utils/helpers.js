@@ -45,3 +45,31 @@ export const wait = () => {
     new Promise(res => setTimeout(res, Math.random() * 2000))
 }
 
+export const calculateSpentByBudget = budgetId => {
+    const expenses = fetchData("expenses") ?? []
+
+    const budgetSpent = expenses.reduce((acc, expense) => {
+        // check if expense.id equals budget.id
+        if (expense.budgetId !== budgetId) return acc
+
+        // add the current amount to total
+        return acc += expense.amount
+    }, 0)
+
+    return budgetSpent
+}
+
+// Formatting functions
+export const formatCurrency = (amount) => {
+    return amount.toLocaleString(undefined, {
+        style: "currency",
+        currency: "USD"
+    })
+}
+
+export const formatPercentage = amount => {
+    return amount.toLocaleString(undefined, {
+        style: "percent",
+        minimumFractionDigits: 0
+    })
+}
