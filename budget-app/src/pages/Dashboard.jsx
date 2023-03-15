@@ -6,15 +6,17 @@ import Intro from '../components.jsx/Intro'
 import AddBudgetForm from '../components.jsx/AddBudgetForm'
 import AddExpenseForm from '../components.jsx/AddExpenseForm';
 import BudgetItem from '../components.jsx/BudgetItem';
+import Table from '../components.jsx/Table';
 
-// loader
+// Loader
 export const dashboardLoader = () => {
     const username = fetchData("username")
     const budgets = fetchData("budgets")
-    return { username, budgets }
+    const expenses = fetchData("expenses")
+    return { username, budgets, expenses }
 }
 
-// action
+// Action
 export const dashboardAction = async ({ request }) => {
     const data = await request.formData()
     const {_action, ...values} = Object.fromEntries(data)
@@ -55,7 +57,7 @@ export const dashboardAction = async ({ request }) => {
 }
 
 const Dashboard = () => {
-  const { username, budgets } = useLoaderData()
+  const { username, budgets, expenses } = useLoaderData()
 
   return (
     <>
@@ -79,6 +81,17 @@ const Dashboard = () => {
                                     <BudgetItem key={budget.id} budget={budget} /> 
                                 )}
                             </div>
+                            {
+                                expenses && expenses.length > 0 &&
+                                <div>
+                                    <h2>Recent Expenses</h2>
+                                    <Table 
+                                        expenses={expenses.sort((a, b) => 
+                                            b.createdAt - a.createdAt
+                                        )} 
+                                    />
+                                </div>
+                            }
                         </div>
                         :
                         <div>
