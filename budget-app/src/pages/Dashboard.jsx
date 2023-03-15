@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { fetchData, createBudget } from '../utils/helpers'
+import { fetchData, createBudget, createExpense } from '../utils/helpers'
 import Intro from '../components.jsx/Intro'
 import AddBudgetForm from '../components.jsx/AddBudgetForm'
+import AddExpenseForm from '../components.jsx/AddExpenseForm';
 
 // loader
 export const dashboardLoader = () => {
@@ -36,6 +37,20 @@ export const dashboardAction = async ({ request }) => {
             throw new Error('There was a problem creating your budget!')
         }
     }
+
+    if (_action === 'createExpense') {
+        try {
+            createExpense({ 
+                name: values.newExpense,
+                amount: values.newExpenseAmount,
+                budgetId: values.newExpenseBudget
+            })
+            return toast.success(`Expense ${values.newExpense} created!`)
+            
+        } catch (error) {
+            throw new Error('There was a problem creating your expense!')
+        }
+    }
 }
 
 const Dashboard = () => {
@@ -49,12 +64,26 @@ const Dashboard = () => {
             <div>
                 <h1>Welcome back, <span>{username}</span></h1>
                 <div>
-                    {/* {budgets} */}
-                    <div>
+                    {
+                        budgets && budgets.length > 0 
+                        ?
                         <div>
-                            <AddBudgetForm />
+                            <div>
+                                <AddBudgetForm />
+                                <AddExpenseForm budgets={budgets} />
+                            </div>
                         </div>
-                    </div>
+                        :
+                        <div>
+                            <p>
+                                Personal budgeting is the secret to financial
+                                freedom.
+                            </p>
+                            <p>Create a budget to get started!</p>
+                            <AddBudgetForm />
+                            <AddExpenseForm />
+                        </div>
+                    }
                 </div>
             </div> 
             : 
