@@ -1,12 +1,12 @@
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { fetchData, createBudget, createExpense } from '../utils/helpers'
 import Intro from '../components.jsx/Intro'
 import AddBudgetForm from '../components.jsx/AddBudgetForm'
 import AddExpenseForm from '../components.jsx/AddExpenseForm';
 import BudgetItem from '../components.jsx/BudgetItem';
 import Table from '../components.jsx/Table';
+import { fetchData, createBudget, createExpense } from '../utils/helpers'
 
 // Loader
 export const dashboardLoader = () => {

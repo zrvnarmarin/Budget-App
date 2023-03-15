@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { deleteItem } from '../utils/helpers';
 
 export const logoutAction = async () => {
-  // delete the user, budgets and expenses
   deleteItem({ key: 'username' })
   deleteItem({ key: 'budgets' })
   deleteItem({ key: 'expenses' })

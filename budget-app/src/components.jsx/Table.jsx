@@ -1,5 +1,6 @@
 import React from 'react'
 import ExpenseItem from './ExpenseItem'
+import { tableHeadData } from '../data/recentExpensesTableHeadData'
 
 const Table = ({ expenses }) => {
   return (
@@ -8,7 +9,7 @@ const Table = ({ expenses }) => {
             <thead>
                 <tr>
                     {
-                        ["Name", "Amount", "Date"].map((i, index) => (
+                        tableHeadData.map((i, index) => (
                             <th key={index}>{i}</th>
                         ))
                     }
